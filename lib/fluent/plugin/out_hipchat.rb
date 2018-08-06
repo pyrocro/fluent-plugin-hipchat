@@ -1,4 +1,4 @@
-require 'hipchat-api'
+require 'hipchat'
 require 'fluent/plugin/output'
 
 module Fluent::Plugin
