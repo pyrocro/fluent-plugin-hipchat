@@ -35,7 +35,7 @@ module Fluent::Plugin
       compat_parameters_convert(conf, :buffer)
       super
 
-      @hipchat = HipChat::API.new(conf['api_token'])
+      @hipchat = HipChat::Client.new(conf['api_token'])
       @default_room = conf['default_room']
       @default_notify = conf['default_notify'] || 0
       @default_timeout = conf['default_timeout']
