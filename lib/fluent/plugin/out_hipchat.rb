@@ -83,8 +83,8 @@ module Fluent::Plugin
       end
       color = COLORS.include?(record['color']) ? record['color'] : @default_color
       message_format = FORMAT.include?(record['format']) ? record['format'] : @default_format
-      @hipchat.set_timeout(@default_timeout.to_i) unless @default_timeout.nil?
-      response = @hipchat.rooms_message(room, from, message, notify, color, message_format)
+      #@hipchat.set_timeout(@default_timeout.to_i) unless @default_timeout.nil?
+      response = @hipchat[room].send(from, message)
       raise StandardError, response['error'][@key_name].to_s if defined?(response['error'][@key_name])
     end
 
@@ -92,8 +92,8 @@ module Fluent::Plugin
       room = record['room'] || @default_room
       from = record['from'] || @default_from
       topic = record['topic']
-      response = @hipchat.rooms_topic(room, topic, from)
-      raise StandardError, response['error'][@key_name].to_s if defined?(response['error'][@key_name])
+      #response = @hipchat.rooms_topic(room, topic, from)
+      #raise StandardError, response['error'][@key_name].to_s if defined?(response['error'][@key_name])
     end
   end
 end
