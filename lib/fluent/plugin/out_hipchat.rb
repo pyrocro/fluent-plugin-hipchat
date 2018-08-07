@@ -73,6 +73,35 @@ module Fluent::Plugin
     end
 
     def send_message(record)
+      card = '{
+  "style": "application",
+  "url": "https://www.application.com/an-object",
+  "format": "medium",
+  "id": "db797a68-0aff-4ae8-83fc-2e72dbb1a707",
+  "title": "Sample application card",
+  "description": "This is a description of an application object.\nwith 2 lines of text",
+  "icon": {
+    "url": "http://bit.ly/1S9Z5dF"
+  },
+  "attributes": [
+    {
+      "label": "attribute1",
+      "value": {
+        "label": "value1"
+      }
+    },
+    {
+      "label": "attribute2",
+      "value": {
+        "icon": {
+          "url": "http://bit.ly/1S9Z5dF"
+        },
+        "label": "value2",
+        "style": "lozenge-complete"
+      }
+    }
+  ]
+}'
       room = record['room'] || @default_room
       from = record['from'] || @default_from
       message = record[@key_name]
@@ -84,8 +113,7 @@ module Fluent::Plugin
       color = COLORS.include?(record['color']) ? record['color'] : @default_color
       message_format = FORMAT.include?(record['format']) ? record['format'] : @default_format
       #@hipchat.set_timeout(@default_timeout.to_i) unless @default_timeout.nil?
-      response = @hipchat[room].send(from, "<h1>E-Telegram from fluentd</h1><br/>:ghost:<b>"+message+"</b>", :color=>color,:notify=>notify,:from=>from)
-      puts response.to_json
+      response = @hipchat[room].send(from, "<h1>E-Telegram from fluentd</h1><br/>:ghost:<b>"+message+"</b>", :color=>color,:notify=>notify,:from=>from,:card=>card)      
       raise StandardError, response['error'][@key_name].to_s if defined?(response['error'][@key_name])
     end
 
