@@ -73,7 +73,7 @@ module Fluent::Plugin
     end
 
     def send_message(record)
-      card = JSON.parse('{"style":"image","id":"172fe15d-d72e-4f78-8712-0ec74e7f9aa3","url":"http://bit.ly/1TmKuKQ","title":"Sample image card","thumbnail":{"url":"http://bit.ly/1TmKuKQ","url@2x":"http://bit.ly/1TmKuKQ","width":1193,"height":564}}')
+      card = JSON.parse('{"style":"application","url":"https://www.application.com/an-object","format":"medium","id":"db797a68-0aff-4ae8-83fc-2e72dbb1a707","title":"Sample application card","description":"This is a description of an application object.\nwith 2 lines of text","icon":{"url":"http://bit.ly/1S9Z5dF"},"attributes":[{"label":"attribute1","value":{"label":"value1"}},{"label":"attribute2","value":{"icon":{"url":"http://bit.ly/1S9Z5dF"},"label":"value2","style":"lozenge-complete"}}]}')
       room = record['room'] || @default_room
       from = record['from'] || @default_from
       message = record[@key_name]
