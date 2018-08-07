@@ -73,7 +73,7 @@ module Fluent::Plugin
     end
 
     def send_message(record)
-      card = '{"style":"image","id":"172fe15d-d72e-4f78-8712-0ec74e7f9aa3","url":"http://bit.ly/1TmKuKQ","title":"Sample image card","thumbnail":{"url":"http://bit.ly/1TmKuKQ","url@2x":"http://bit.ly/1TmKuKQ","width":1193,"height":564}}'
+      card = JSON.parse('{"style":"image","id":"172fe15d-d72e-4f78-8712-0ec74e7f9aa3","url":"http://bit.ly/1TmKuKQ","title":"Sample image card","thumbnail":{"url":"http://bit.ly/1TmKuKQ","url@2x":"http://bit.ly/1TmKuKQ","width":1193,"height":564}}')
       room = record['room'] || @default_room
       from = record['from'] || @default_from
       message = record[@key_name]
