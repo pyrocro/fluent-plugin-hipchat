@@ -84,7 +84,7 @@ module Fluent::Plugin
       color = COLORS.include?(record['color']) ? record['color'] : @default_color
       message_format = FORMAT.include?(record['format']) ? record['format'] : @default_format
       #@hipchat.set_timeout(@default_timeout.to_i) unless @default_timeout.nil?
-      response = @hipchat[room].send(from, "<br/><b>"+message+"</b>", :color=>'red',:notify=>true)
+      response = @hipchat[room].send(from, "<h1>E-Telegram from fluentd</h1><br/>:ghost:<b>"+message+"</b>", :color=>color,:notify=>notify,:from=>from)
       puts response.to_json
       raise StandardError, response['error'][@key_name].to_s if defined?(response['error'][@key_name])
     end
