@@ -85,6 +85,7 @@ module Fluent::Plugin
       message_format = FORMAT.include?(record['format']) ? record['format'] : @default_format
       #@hipchat.set_timeout(@default_timeout.to_i) unless @default_timeout.nil?
       response = @hipchat[room].send(from, message, :color=>'red')
+      puts response.to_json
       raise StandardError, response['error'][@key_name].to_s if defined?(response['error'][@key_name])
     end
 
